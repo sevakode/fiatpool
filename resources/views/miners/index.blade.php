@@ -32,7 +32,7 @@
             <tr>
                 <a href="{{url($miner->id)}}">
                     <td>{{$miner->name}}</td>
-                    <td>{{$miner->ethBalance}}</td>
+                    <td>{{$miner->ethBalance()}}</td>
 {{--                    <td>{{$miner->balance}}</td>--}}
 
                     <td>{{$miner->interval}}</td>
