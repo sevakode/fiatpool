@@ -14,4 +14,8 @@ class Miner extends Model
     public function lastWithdraw(){
         return $this->withdraws()->where('status',false);
     }
+    public function ethBalance(){
+        return $this->lastWithdraw->eth;
+    }
+
 }

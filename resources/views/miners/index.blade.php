@@ -21,7 +21,7 @@
             <tr>
                 <th scope="col">Имя</th>
                 <th scope="col">Эфира</th>
-                <th scope="col">Баланс</th>
+{{--                <th scope="col">Баланс</th>--}}
                 <th scope="col">Интервал</th>
                 <th scope="col">Время вывода</th>
             </tr>
@@ -32,8 +32,8 @@
             <tr>
                 <a href="{{url($miner->id)}}">
                     <td>{{$miner->name}}</td>
-                    <td>{{$miner->ethbalanse}}</td>
-                    <td>{{$miner->balance}}</td>
+                    <td>{{$miner->ethBalance}}</td>
+{{--                    <td>{{$miner->balance}}</td>--}}
 
                     <td>{{$miner->interval}}</td>
                     <td>{{$miner->created_at}}</td>
