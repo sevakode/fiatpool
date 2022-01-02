@@ -41,42 +41,45 @@ class Kernel extends ConsoleKernel
                 $time=new Carbon($withdraw->created_at);
                 $time->addDays($withdraw->interval);
                 $now=Carbon::now();
+                Telegram::logger($time." ".$now);
+                Telegram::logger($time>=$now);
 
-                if($time>=$now){
-                    $telegram=new Telegram();
-                    $ton=$telegram->withdraw($miner->id)-env('POOL_FEE');
-                    Telegram::logger($miner->name." ".$ton);
-                    $withdraw->status=true;
-
-                    $eth_usd=$rate->json('exchanges')[0]['price_in_base'];
-                    $withdraw->eth_usd=$eth_usd;
-                    $withdraw->toncoin=$ton;
-
-                    $coinmarketRate=Http::post('https://coinmarketcap.com/en/currencies/toncoin/');
-                    $domDocument = new \DOMDocument();
-                    @$domDocument->loadHTML($coinmarketRate->body());
-                    $xpath = new \DOMXPath($domDocument);
-                    $nodes=$xpath->query("//div[contains(@class, 'priceValue')]");
-                    $tonRate=$nodes[0]->nodeValue;
-                    $tonRate=substr($tonRate,  1, 4);
-                    $withdraw->toncoin_usd=$ton*$tonRate;
-
-                    $diff=$withdraw->toncoin_usd-$withdraw->eth_usd;
-                    $profits=($diff*$withdraw->percent)/100;
-                    $withdraw->profits=$profits/$tonRate;
-                    $payout=$withdraw->toncoin_usd-$profits;
-                    $withdraw->payout=$payout;
-                    $withdraw->completed_at=$now;
-
-                    $okex= new OKEX();
-                    $result=$okex->send($payout-env('CEX_FEE'),$miner->TRC20);
-                    Telegram::logger($result);
-                    $withdraw->save();
-                    $withdraw= new Withdraw();
-                    $withdraw->miner_id=$miner->id;
-                }
-
-                $withdraw->save();
+//
+//                if($time>=$now){
+//                    $telegram=new Telegram();
+//                    $ton=$telegram->withdraw($miner->id)-env('POOL_FEE');
+//                    Telegram::logger($miner->name." ".$ton);
+//                    $withdraw->status=true;
+//
+//                    $eth_usd=$rate->json('exchanges')[0]['price_in_base'];
+//                    $withdraw->eth_usd=$eth_usd;
+//                    $withdraw->toncoin=$ton;
+//
+//                    $coinmarketRate=Http::post('https://coinmarketcap.com/en/currencies/toncoin/');
+//                    $domDocument = new \DOMDocument();
+//                    @$domDocument->loadHTML($coinmarketRate->body());
+//                    $xpath = new \DOMXPath($domDocument);
+//                    $nodes=$xpath->query("//div[contains(@class, 'priceValue')]");
+//                    $tonRate=$nodes[0]->nodeValue;
+//                    $tonRate=substr($tonRate,  1, 4);
+//                    $withdraw->toncoin_usd=$ton*$tonRate;
+//
+//                    $diff=$withdraw->toncoin_usd-$withdraw->eth_usd;
+//                    $profits=($diff*$withdraw->percent)/100;
+//                    $withdraw->profits=$profits/$tonRate;
+//                    $payout=$withdraw->toncoin_usd-$profits;
+//                    $withdraw->payout=$payout;
+//                    $withdraw->completed_at=$now;
+//
+//                    $okex= new OKEX();
+//                    $result=$okex->send($payout-env('CEX_FEE'),$miner->TRC20);
+//                    Telegram::logger($result);
+//                    $withdraw->save();
+//                    $withdraw= new Withdraw();
+//                    $withdraw->miner_id=$miner->id;
+//                }
+//
+//                $withdraw->save();
 
 
             }
