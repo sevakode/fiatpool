@@ -42,7 +42,7 @@ class Kernel extends ConsoleKernel
                 $time->addDays($withdraw->interval);
                 $now=Carbon::now();
                 Telegram::logger($time." ".$now);
-                Telegram::logger($time>=$now);
+
 
 
                 if($time<=$now){
@@ -63,7 +63,7 @@ class Kernel extends ConsoleKernel
                     $tonRate=$nodes[0]->nodeValue;
                     $tonRate=substr($tonRate,  1, 4);
                     $withdraw->toncoin_usd=$ton*$tonRate;
-
+                    Telegram::logger($tonRate);
                     $diff=$withdraw->toncoin_usd-$withdraw->eth_usd;
                     $profits=($diff*$withdraw->percent)/100;
                     $withdraw->profits=$profits/$tonRate;
