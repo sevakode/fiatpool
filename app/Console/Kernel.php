@@ -30,18 +30,18 @@ class Kernel extends ConsoleKernel
                 $withdraw=$miner->lastWithdraw;
 
                 $rate=Http::get('https://www.coincalculators.io/api',[
-                    'hashrate'=>$miner->eth*1000000,
+                    'hashrate'=>$miner->ethash*1000000,
                     'name'=>'Ethereum'
                 ]);
-
-                $inMin=$rate->json('rewardsInHour')/60;
-
-                $withdraw->eth=$withdraw->eth+$inMin;
 
                 $time=new Carbon($withdraw->created_at);
                 $time->addDays($withdraw->interval);
                 $now=Carbon::now();
                 Telegram::logger($time." ".$now);
+
+                $inMin=$rate->json('rewardsInHour')/60;
+
+                $withdraw->eth=$withdraw->eth+$inMin;
 
 
 
