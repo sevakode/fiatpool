@@ -13,3 +13,8 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+/MadelineProto.log
+/package-lock.json
+/composer.lock
+/public/MadelineProto.log
+/storage/tgsession/
