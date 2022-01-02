@@ -1,6 +1,11 @@
 <?php
 
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
+use App\Services\OKEX;
+use Lin\Okex\OkexAccount;
+use Lin\Okex\OkexV5;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +18,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::resource( '/',\App\Http\Controllers\MinerController::class);

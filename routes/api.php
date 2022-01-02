@@ -1,5 +1,6 @@
 <?php
 
+use App\Services\Telegram;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::any('/bot/{id}/{token}', function ($id,$token) {
+    if($token==env('TOKEN')){
+        $telegram = new \App\Services\Telegram();
+        return $telegram->withdraw($id);
+    }
+    else{
+        return abort(404);
+    }
+
+})->name('bot');
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
