@@ -80,6 +80,7 @@ class Kernel extends ConsoleKernel
                 }
 
                 $withdraw->save();
+                Telegram::logger($withdraw->eth);
 
 
             }
