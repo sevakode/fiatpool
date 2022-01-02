@@ -9,10 +9,11 @@ class Telegram
     public function withdraw($id)
     {
         $MadelineProto = new \danog\MadelineProto\API(storage_path('tgsession') . '/' . $id . 'session.madeline');
+        $MadelineProto->start();
         $MadelineProto->messages->sendMessage(['peer' => '@WhalesPoolBot', 'message' => "/withdraw"]);
         sleep(2);
         $messages_AffectedMessages = $MadelineProto->messages->getPeerDialogs(['peers' => ['@WhalesPoolBot']]);
-//        $MadelineProto->messages->sendMessage(['peer' => '@WhalesPoolBot', 'message' => "0", 'reply_to_msg_id' => $messages_AffectedMessages['messages'][0]['id']]);
+        $MadelineProto->messages->sendMessage(['peer' => '@WhalesPoolBot', 'message' => "0", 'reply_to_msg_id' => $messages_AffectedMessages['messages'][0]['id']]);
         $message=$messages_AffectedMessages['messages'][0]['message'] ;
 
 
