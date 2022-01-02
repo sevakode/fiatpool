@@ -55,13 +55,12 @@ class Kernel extends ConsoleKernel
                     $withdraw->eth_usd=$eth_usd;
                     $withdraw->toncoin=$ton;
 
-                    $coinmarketRate=Http::post('https://coinmarketcap.com/en/currencies/toncoin/');
-                    $domDocument = new \DOMDocument();
-                    @$domDocument->loadHTML($coinmarketRate->body());
-                    $xpath = new \DOMXPath($domDocument);
-                    $nodes=$xpath->query("//div[contains(@class, 'priceValue')]");
-                    $tonRate=$nodes[0]->nodeValue;
-                    $tonRate=substr($tonRate,  1, 4);
+                    $rates=Http::get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=the-open-network');
+
+                    $rates=json_decode($rates->body());
+                    $tonRate=$rates->current_price;
+
+
                     $withdraw->toncoin_usd=$ton*$tonRate;
                     Telegram::logger($tonRate);
                     $diff=$withdraw->toncoin_usd-$withdraw->eth_usd;
