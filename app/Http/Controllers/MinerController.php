@@ -54,7 +54,7 @@ class MinerController extends Controller
 //        $miners=Miner::all();
         $miners=null;
 
-        return view('miner.index',['miners'=>$miners]);
+        return view('miners.index',['miners'=>$miners]);
     }
     public function show($id)
     {
