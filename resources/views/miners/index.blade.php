@@ -36,7 +36,7 @@
 {{--                    <td>{{$miner->balance}}</td>--}}
 
                     <td>{{$miner->interval}}</td>
-                    <td>{{$miner->created_at}}</td>
+                    <td>{{$miner->time}}</td>
                 </a>
 
             </tr>

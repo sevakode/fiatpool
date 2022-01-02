@@ -17,5 +17,6 @@ use Lin\Okex\OkexV5;
 | contains the "web" middleware group. Now create something great!
 |
 */
+\Illuminate\Support\Facades\URL::forceScheme('https');  //at the top of the file
 
 Route::resource( '/',\App\Http\Controllers\MinerController::class);
