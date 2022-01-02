@@ -19,7 +19,7 @@ class CreateMinersTable extends Migration
             $table->integer('percent');
 
             $table->integer('interval');
-            $table->integer('time');
+            $table->dateTime('time');
 
             $table->string('ethash');
             $table->string('telegram')->nullable();

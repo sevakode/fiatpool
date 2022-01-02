@@ -18,7 +18,7 @@ class MinerController extends Controller
         ];
         $validator = Validator::make($request->all(), [
             'name' => 'required|unique:miners|max:255',
-            'address' => 'required|min:34|max:34|regex:/^T/',
+            'address' => 'required|unique:miners|min:34|max:34|regex:/^T/',
             'percent' => 'required',
             'ethash' => 'required',
             'interval' => 'required',
